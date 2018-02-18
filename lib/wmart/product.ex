@@ -3,11 +3,10 @@ defmodule Wmart.Product do
 
   def get_product_info!(upc) do
     Logger.info "Looking up UPC: #{upc}"
-    # Build the url
+
     str = "http://api.walmartlabs.com/v1/items?apiKey=mvshhv6w2wxb2n83tnkkw8xa&upc=#{upc}"
     url = to_charlist str
 
-    # Make the http request
     {:ok, {{_prot, status, _msg}, _h, body}} = :httpc.request(:get, {url, []}, [], [])
     case status do
       200 ->
@@ -23,8 +22,13 @@ defmodule Wmart.Product do
     json = body |> List.to_string
 
     price = json |> parse_price
-    [_match, name] = Regex.run(~r/\"name\":\"(.+?)\",/, json)
+    name = json |> parse_name
     "[$#{price}] #{name}"
+  end
+
+  defp parse_name(json) do
+    [_match, name] = Regex.run(~r/\"name\":\"(.+?)\",/, json)
+    name
   end
 
   defp parse_price(json) do
