@@ -6,6 +6,7 @@ defmodule Wmart.Server do
   def open(port) do
     {:ok, socket} = :gen_tcp.listen(port,
                       [:binary, packet: :line, active: false, reuseaddr: true])
+    Logger.info "Starting server listening on port #{port}"
     loop_acceptor(socket)
   end
 
