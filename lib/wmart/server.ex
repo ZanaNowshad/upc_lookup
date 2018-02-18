@@ -1,6 +1,5 @@
-require Logger
-
 defmodule Wmart.Server do
+  require Logger
   alias Wmart.Parser
 
   def open(port) do
@@ -11,7 +10,6 @@ defmodule Wmart.Server do
   end
 
   defp loop_acceptor(socket) do
-    Logger.info "Accepting connections..."
     {:ok, client} = :gen_tcp.accept(socket)
     {:ok, pid} = Task.Supervisor.start_child(Wmart.TaskSupervisor, fn -> serve(client) end)
     :ok = :gen_tcp.controlling_process(client, pid)
@@ -37,6 +35,6 @@ defmodule Wmart.Server do
   end
 
   defp write_line(line, socket) do
-    :gen_tcp.send(socket, "\r#{line}\r\n")
+    :gen_tcp.send(socket, "\r\n#{line}\r\n")
   end
 end

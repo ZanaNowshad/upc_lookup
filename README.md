@@ -19,3 +19,11 @@ To test locally, open a `telnet` client connection to the server:
 ## Demo App
 
 If you just want to try out the lookup without cloning the repo you can open a `telnet` connection to `li1018-153.members.linode.com` on port `4040`.
+
+## Test UPCs
+
+Here are some of the UPCs I used while testing:
+
+* 078913280024
+* 041143051603
+* 815301008439

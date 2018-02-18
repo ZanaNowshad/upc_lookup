@@ -1,5 +1,8 @@
 defmodule Wmart.Product do
+  require Logger
+
   def get_product_info!(upc) do
+    Logger.info "Looking up UPC: #{upc}"
     # Build the url
     str = "http://api.walmartlabs.com/v1/items?apiKey=mvshhv6w2wxb2n83tnkkw8xa&upc=#{upc}"
     url = to_charlist str
