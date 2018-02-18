@@ -6,11 +6,11 @@ defmodule Wmart.Server do
   def open(port) do
     {:ok, socket} = :gen_tcp.listen(port,
                       [:binary, packet: :line, active: false, reuseaddr: true])
-    Logger.info "Accepting connections on port #{port}"
     loop_acceptor(socket)
   end
 
   defp loop_acceptor(socket) do
+    Logger.info "Accepting connections..."
     {:ok, client} = :gen_tcp.accept(socket)
     {:ok, pid} = Task.Supervisor.start_child(Wmart.TaskSupervisor, fn -> serve(client) end)
     :ok = :gen_tcp.controlling_process(client, pid)
