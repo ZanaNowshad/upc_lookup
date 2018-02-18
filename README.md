@@ -1,5 +1,7 @@
 # UPC Lookup
 
+![Let me scan you](https://78.media.tumblr.com/803e11343bba44cd17830d11fe2c7f04/tumblr_no84xzlCKP1qhzi2jo1_500.gif)
+
 A socket server using only the Elixir and Erlang Core libraries that allows you to look up the price and name for an item by the product's UPC.
 
 ## Running Locally
